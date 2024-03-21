@@ -1,6 +1,7 @@
 package com.student.api.Student.API.controller;
 
 import com.student.api.Student.API.models.Student;
+import com.student.api.Student.API.service.ExamService;
 import com.student.api.Student.API.service.StudentService;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +13,8 @@ public class StudentController {
     // You need to use @RestController annotation to let spring know this is a controller class
 
     StudentService studentService = new StudentService();
+
+    ExamService examService = new ExamService();
 
     @GetMapping("/student/details")
     public String getStudents(){
@@ -29,6 +32,16 @@ public class StudentController {
         System.out.println("request recieved in controller layer");
         studentService.saveStudent(student);
         return "Student got saved";
+    }
+
+    @PutMapping("/student/marks/update")
+    public void updateMarks(@RequestParam String id, @RequestParam int marks){
+        studentService.updateStudentResultById(id, marks);
+    }
+
+    @GetMapping("/student/marks")
+    public Integer studentMarksById(@RequestParam String id){
+       return examService.getStudentResultById(id);
     }
 
     // I want to get paryicular student details

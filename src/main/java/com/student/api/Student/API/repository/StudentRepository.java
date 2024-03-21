@@ -11,6 +11,8 @@ public class StudentRepository {
     // Repository layer is something that can perform database related operation
     // StudentID vs Student Object
     HashMap<String, Student> studentDb = new HashMap<>();
+    // Student ID vs Student Marks
+    HashMap<String, Integer> studentResult = new HashMap<>();
 
     public void saveStudent(Student student){
         System.out.println("Request recieved repository layer");
@@ -25,6 +27,14 @@ public class StudentRepository {
 
     public Student getStudentById(String id){
         return studentDb.get(id);
+    }
+
+    public Integer getResultById(String id){
+        return studentResult.get(id);
+    }
+
+    public void updateStudentResultByID(String id, int marks){
+        studentResult.put(id, marks);
     }
 
     // "Somendra" : "QA"
